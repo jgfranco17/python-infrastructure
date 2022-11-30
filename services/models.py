@@ -18,9 +18,8 @@ class NetworkAgent(object):
         self.socket.bind((host, port))
         self._host, self._port = self.socket.getsockname()
         
-        
     @property
-    def members(self) -> list:
+    def nomad_members(self) -> list:
         member_list = []
         members = self.nomad.agent.get_members()
         for member in members["Members"]:
@@ -34,5 +33,9 @@ class NetworkAgent(object):
     
     @property
     def ip_str(self) -> str:
-        return f'{self._host}:{self._port}'       
+        return f'{self._host}:{self._port}'  
+    
+    @property
+    def health(self):
+        return self.nomad.agent.get_health()     
     
