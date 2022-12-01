@@ -13,11 +13,6 @@ class NetworkAgent(object):
         # Configure Docker
         self.docker = docker.from_env()
         
-        # Set up local UDP socket
-        self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-        self.socket.bind((host, port))
-        self._host, self._port = self.socket.getsockname()
-        
     @property
     def nomad_members(self) -> list:
         member_list = []
